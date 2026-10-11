@@ -157,7 +157,18 @@ const getData=(key)=>{try{return JSON.parse(localStorage.getItem(key)||'[]')}cat
 function renderNotices(){const notices=getData('dds_notices');if(!notices.length)return;$('#noticeList').innerHTML=notices.map(n=>`<article class="notice"><div class="date">${escapeHtml(n.date||'INFO')}</div><div><div class="tag">School notice</div><h3>${escapeHtml(n.title)}</h3><p>${escapeHtml(n.body)}</p></div></article>`).join('')}
 function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
 function refreshOutput(){const a=getData('dds_enquiries');$('#adminOutput').textContent=a.length?JSON.stringify(a,null,2):'No enquiries collected yet.'}
-$('#admissionForm').addEventListener('submit',e=>{e.preventDefault();const f=new FormData(e.currentTarget);const entry=Object.fromEntries(f.entries());entry.submittedAt=new Date().toISOString();const all=getData('dds_enquiries');all.push(entry);saveData('dds_enquiries',all);$('#success').style.display='block';$('#success').textContent=lang==='bn'?'ডেমো অনুসন্ধান এই ব্রাউজারে সংরক্ষিত হয়েছে। স্কুলে পাঠানো হয়নি।':'Demo enquiry saved in this browser only. It has not been sent to the school.';e.currentTarget.reset();refreshOutput()});
+const admissionForm = $('#admissionForm');
+if (admissionForm) admissionForm.addEventListener('submit', e => {
+  e.preventDefault();
+  const f = new FormData(e.currentTarget);
+  const entry = Object.fromEntries(f.entries());
+  const entries = getData('dds_enquiries');
+  entries.push({...entry, submittedAt: new Date().toISOString()});
+  saveData('dds_enquiries', entries);
+  refreshOutput();
+  alert('Enquiry saved.');
+});
+
 $('#noticeForm').addEventListener('submit',e=>{e.preventDefault();const all=getData('dds_notices');all.unshift({title:$('#noticeTitle').value, date:$('#noticeDate').value, body:$('#noticeBody').value});saveData('dds_notices',all);renderNotices();e.currentTarget.reset();alert('Demo notice added to this browser.')});
 $('#exportBtn').addEventListener('click',()=>{const data=JSON.stringify(getData('dds_enquiries'),null,2);const blob=new Blob([data],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='derozio-admission-enquiries-demo.json';a.click();URL.revokeObjectURL(a.href)});
 $('#clearBtn').addEventListener('click',()=>{if(confirm('Clear all demo notices and enquiries from this browser?')){localStorage.removeItem('dds_enquiries');localStorage.removeItem('dds_notices');renderNotices();refreshOutput()}});
