@@ -31,6 +31,67 @@ footer{background:#07182e;color:#dbe5f2;padding:45px 24px 20px}.footer-grid{max-
   background-position: center;
   background-repeat: no-repeat;
 }
+  
+.school-slideshow {
+  position: relative;
+  max-width: 1120px;
+  margin: 36px auto;
+  padding: 0 24px;
+}
+.slide-track {
+  position: relative;
+  height: clamp(240px, 45vw, 520px);
+  overflow: hidden;
+  border-radius: 18px;
+  background: #0b1f3a;
+  box-shadow: 0 12px 32px rgba(11,31,58,.18);
+}
+.school-slide {
+  display: none;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.school-slide.active {
+  display: block;
+}
+.slide-prev, .slide-next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  border: 0;
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  background: rgba(11,31,58,.8);
+  color: #fff;
+  font-size: 22px;
+  cursor: pointer;
+}
+.slide-prev { left: 34px; }
+.slide-next { right: 34px; }
+.slide-dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 14px;
+}
+.slide-dot {
+  width: 10px;
+  height: 10px;
+  border: 0;
+  border-radius: 50%;
+  background: #cbd5e1;
+  cursor: pointer;
+  padding: 0;
+}
+.slide-dot.active { background: #d8ad4c; }
+@media(max-width:560px) {
+  .school-slideshow { padding: 0 14px; }
+  .slide-prev { left: 22px; }
+  .slide-next { right: 22px; }
+}
+
 
 </style>
 </head>
@@ -55,6 +116,21 @@ footer{background:#07182e;color:#dbe5f2;padding:45px 24px 20px}.footer-grid{max-
 <section id="admissions"><div class="wrap"><div class="section-head"><div class="eyebrow" data-en="Take the first step" data-bn="প্রথম পদক্ষেপ নিন">Take the first step</div><h2 data-en="Admission enquiry" data-bn="ভর্তি সংক্রান্ত অনুসন্ধান">Admission enquiry</h2><p data-en="Complete the form and the school team can follow up. This demo form stores entries only in this browser." data-bn="ফর্মটি পূরণ করুন। এই ডেমো ফর্মের তথ্য শুধু এই ব্রাউজারেই সংরক্ষিত হয়।">Complete the form and the school team can follow up. This demo form stores entries only in this browser.</p></div>
 <div class="form-card"><h3 data-en="Tell us about your child" data-bn="আপনার সন্তানের তথ্য দিন">Tell us about your child</h3><p class="hint" data-en="Fields marked * are required." data-bn="* চিহ্নিত ঘরগুলি পূরণ করা আবশ্যক।">Fields marked * are required.</p><form id="admissionForm"><div class="form-grid"><div class="field"><label for="student" data-en="Student's full name *" data-bn="শিক্ষার্থীর পুরো নাম *">Student's full name *</label><input id="student" name="student" required placeholder="Full name"></div><div class="field"><label for="class" data-en="Applying for class *" data-bn="যে শ্রেণিতে ভর্তি হতে চায় *">Applying for class *</label><select id="class" name="class" required><option value="">Select class</option><option>Pre-Primary</option><option>Class 1</option><option>Class 2</option><option>Class 3</option><option>Class 4</option><option>Class 5</option><option>Class 6</option><option>Class 7</option><option>Class 8</option><option>Class 9</option><option>Class 10</option></select></div><div class="field"><label for="guardian" data-en="Parent/guardian name *" data-bn="অভিভাবকের নাম *">Parent/guardian name *</label><input id="guardian" name="guardian" required placeholder="Parent or guardian"></div><div class="field"><label for="phone" data-en="Phone number *" data-bn="ফোন নম্বর *">Phone number *</label><input id="phone" name="phone" type="tel" required pattern="[0-9+() -]{8,18}" placeholder="Contact number"></div><div class="field"><label for="email" data-en="Email (optional)" data-bn="ইমেল (ঐচ্ছিক)">Email (optional)</label><input id="email" name="email" type="email" placeholder="name@example.com"></div><div class="field"><label for="message" data-en="Message (optional)" data-bn="বার্তা (ঐচ্ছিক)">Message (optional)</label><input id="message" name="message" placeholder="Any question?"></div></div><button class="btn dark" type="submit" data-en="Submit enquiry" data-bn="অনুসন্ধান জমা দিন">Submit enquiry</button><div class="success" id="success" role="status"></div></form></div></div></section>
 <section class="soft" id="admin"><div class="wrap"><div class="section-head"><div class="eyebrow">Website tools</div><h2 data-en="Admin preview" data-bn="অ্যাডমিন প্রিভিউ">Admin preview</h2><p data-en="A local prototype for testing notices and enquiries. It is not a secure live admin panel." data-bn="বিজ্ঞপ্তি ও অনুসন্ধান পরীক্ষা করার স্থানীয় প্রোটোটাইপ। এটি নিরাপদ লাইভ অ্যাডমিন প্যানেল নয়।">A local prototype for testing notices and enquiries. It is not a secure live admin panel.</p></div><div class="form-card"><h3 data-en="Local admin tools" data-bn="স্থানীয় অ্যাডমিন টুল">Local admin tools</h3><p class="hint" data-en="Demo only: data remains on this device/browser. Do not enter sensitive information." data-bn="শুধু ডেমো: তথ্য এই ডিভাইস/ব্রাউজারে থাকে। সংবেদনশীল তথ্য দেবেন না।">Demo only: data remains on this device/browser. Do not enter sensitive information.</p><form id="noticeForm"><div class="form-grid"><div class="field"><label for="noticeTitle">Notice title</label><input id="noticeTitle" required placeholder="e.g. Parent meeting"></div><div class="field"><label for="noticeDate">Date / label</label><input id="noticeDate" placeholder="e.g. 15 OCT"></div></div><div class="field"><label for="noticeBody">Notice details</label><textarea id="noticeBody" required placeholder="Write the announcement"></textarea></div><button class="btn dark" type="submit">Add demo notice</button></form><div style="height:16px"></div><button class="btn" id="exportBtn" type="button">Export enquiries (JSON)</button> <button class="lang" id="clearBtn" type="button">Clear demo data</button><pre class="admin-output" id="adminOutput">No enquiries collected yet.</pre></div></div></section>
+<section id="school-slideshow" class="school-slideshow">
+  <div class="slide-track">
+    <img src="WhatsApp%20Image%202026-10-11%20at%205.03.47%20PM.jpeg" alt="School activity 1" class="school-slide active">
+    <img src="WhatsApp%20Image%202026-10-11%20at%205.03.47%20PM%20(1).jpeg" alt="School activity 2" class="school-slide">
+    <img src="WhatsApp%20Image%202026-10-11%20at%205.03.47%20PM%20(2).jpeg" alt="School activity 3" class="school-slide">
+    <img src="WhatsApp%20Image%202026-10-11%20at%205.03.48%20PM.jpeg" alt="School activity 4" class="school-slide">
+    <img src="WhatsApp%20Image%202026-10-11%20at%205.03.48%20PM%20(1).jpeg" alt="School activity 5" class="school-slide">
+    <img src="WhatsApp%20Image%202026-10-11%20at%205.03.48%20PM%20(2).jpeg" alt="School activity 6" class="school-slide">
+    <img src="WhatsApp%20Image%202026-10-11%20at%205.03.48%20PM%20(3).jpeg" alt="School activity 7" class="school-slide">
+    <img src="WhatsApp%20Image%202026-10-11%20at%205.03.48%20PM%20(4).jpeg" alt="School activity 8" class="school-slide">
+  </div>
+  <button type="button" class="slide-prev" aria-label="Previous photo">❮</button>
+  <button type="button" class="slide-next" aria-label="Next photo">❯</button>
+  <div class="slide-dots"></div>
+</section>
 </main>
 <footer><div class="footer-grid"><div><div style="display:flex;align-items:center;gap:12px"><div class="crest">DDS</div><div><h3 style="margin:0">DEROZIO DAY SCHOOL</h3><small data-en="Learn • Grow • Shine • Together" data-bn="শিখি • বেড়ে উঠি • উজ্জ্বল হই • একসঙ্গে">Learn • Grow • Shine • Together</small></div></div><p data-en="Committed to learning, character, and opportunity since 2009." data-bn="২০০৯ সাল থেকে শিক্ষা, চরিত্রগঠন ও সম্ভাবনার বিকাশে অঙ্গীকারবদ্ধ।">Committed to learning, character, and opportunity since 2009.</p></div><div><h3 data-en="Explore" data-bn="জানুন">Explore</h3><p><a href="#about" data-en="About our school" data-bn="আমাদের সম্পর্কে">About our school</a></p><p><a href="#notices" data-en="Notices" data-bn="বিজ্ঞপ্তি">Notices</a></p><p><a href="#admissions" data-en="Admission enquiry" data-bn="ভর্তি সংক্রান্ত অনুসন্ধান">Admission enquiry</a></p></div><div><h3 data-en="Contact the school" data-bn="যোগাযোগ">Contact the school</h3><p data-en="Please add the official school address and phone number before publishing." data-bn="প্রকাশের আগে স্কুলের সঠিক ঠিকানা ও ফোন নম্বর যোগ করুন।">Please add the official school address and phone number before publishing.</p><p><a href="#admissions">Admission enquiry →</a></p></div></div><div class="copyright">© <span id="year"></span> Derozio Day School. <span data-en="All rights reserved." data-bn="সর্বস্বত্ব সংরক্ষিত।">All rights reserved.</span></div></footer>
 <script>
@@ -71,4 +147,50 @@ $('#noticeForm').addEventListener('submit',e=>{e.preventDefault();const all=getD
 $('#exportBtn').addEventListener('click',()=>{const data=JSON.stringify(getData('dds_enquiries'),null,2);const blob=new Blob([data],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='derozio-admission-enquiries-demo.json';a.click();URL.revokeObjectURL(a.href)});
 $('#clearBtn').addEventListener('click',()=>{if(confirm('Clear all demo notices and enquiries from this browser?')){localStorage.removeItem('dds_enquiries');localStorage.removeItem('dds_notices');renderNotices();refreshOutput()}});
 renderNotices();refreshOutput();
+  (() => {
+  const slides = Array.from(
+    document.querySelectorAll('#school-slideshow .school-slide')
+  );
+  const dotsBox = document.querySelector('#school-slideshow .slide-dots');
+  const prev = document.querySelector('#school-slideshow .slide-prev');
+  const next = document.querySelector('#school-slideshow .slide-next');
+
+  if (!slides.length || !dotsBox || !prev || !next) return;
+
+  let current = 0;
+  let timer;
+
+  slides.forEach((slide, i) => {
+    const dot = document.createElement('button');
+    dot.type = 'button';
+    dot.className = 'slide-dot';
+    dot.setAttribute('aria-label', 'Show photo ' + (i + 1));
+    dot.addEventListener('click', () => show(i));
+    dotsBox.appendChild(dot);
+  });
+
+  const dots = Array.from(dotsBox.querySelectorAll('.slide-dot'));
+
+  function show(index) {
+    current = (index + slides.length) % slides.length;
+
+    slides.forEach((slide, i) => {
+      slide.classList.toggle('active', i === current);
+    });
+
+    dots.forEach((dot, i) => {
+      dot.classList.toggle('active', i === current);
+      dot.setAttribute('aria-current', i === current ? 'true' : 'false');
+    });
+
+    clearInterval(timer);
+    timer = setInterval(() => show(current + 1), 4500);
+  }
+
+  prev.addEventListener('click', () => show(current - 1));
+  next.addEventListener('click', () => show(current + 1));
+
+  show(0);
+})();
+
 </script></body></html>
