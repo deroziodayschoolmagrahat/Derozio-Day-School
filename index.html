@@ -259,7 +259,7 @@ background-image: linear-gradient(90deg, rgba(5,25,55,0.48), rgba(5,25,55,0.08))
 
 <script>
 const $=s=>document.querySelector(s);let lang='en';
-$('#year').textContent=new Date().getFullYear();
+const yearEl = $('#year'); if (yearEl) yearEl.textContent = new Date().getFullYear();
 function setLang(next){lang=next;document.documentElement.lang=lang;document.querySelectorAll('[data-en]').forEach(el=>{el.textContent=el.dataset[lang]||el.dataset.en});document.querySelectorAll('[data-en-html]').forEach(el=>el.innerHTML=el.dataset[lang+'Html']||el.dataset.enHtml);$('#langBtn').textContent=lang==='en'?'বাংলা':'English'}
 $('#langBtn').addEventListener('click',()=>setLang(lang==='en'?'bn':'en'));$('#menuBtn').addEventListener('click',()=>$('#navlinks').classList.toggle('open'));document.querySelectorAll('.navlinks a').forEach(a=>a.addEventListener('click',()=>$('#navlinks').classList.remove('open')));
 const getData=(key)=>{try{return JSON.parse(localStorage.getItem(key)||'[]')}catch{return []}},saveData=(key,data)=>localStorage.setItem(key,JSON.stringify(data));
